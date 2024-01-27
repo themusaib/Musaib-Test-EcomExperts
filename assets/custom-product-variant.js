@@ -28,16 +28,16 @@ class TestVariant extends HTMLElement {
                let mediaId = selectedMedia.dataset.mediaid;
                  if(mediaId){
                     let imageButton = document.querySelector(`[data-media-id="${mediaId}"]`);
-                    console.log(imageButton);
+                    // console.log(imageButton);
                     let mediaGalleryId = imageButton.closest('[data-media-id]').dataset.thumnailId;
-                    console.log("mediaGalleryId",mediaGalleryId);
+                    // console.log("mediaGalleryId",mediaGalleryId);
                     document.querySelector('media-gallery').setActiveMedia(mediaGalleryId, false);
                  }
             }
         }
 
         updateAvailability(selections){
-        console.log(selections);
+        // console.log(selections);
         this.atcForm.querySelector('input[name="id"]').value = selections.currentVariant.id; 
         if(selections.currentVariant.available){
             if(selections.currentVariant.public_title.toLocaleLowerCase().includes('unselected')){

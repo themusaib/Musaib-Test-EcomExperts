@@ -1465,5 +1465,30 @@
         "default": "background-1"
       }
     ]
+  },
+  {
+    "name":"Bundle Functionality",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Settings for Bundle"
+      },
+      {
+        "type": "product",
+        "label":"Conditioned Products",
+        "id":"conditioned_product"
+      },
+      {
+        "type":"textarea",
+        "label":"Specific Variant",
+        "id":"specific_variant",
+        "info":"Copy the Variant title from admin E.g., Black / Medium"
+      },
+      {
+        "type": "product",
+        "label":"Free Product",
+        "id":"free_product"
+      }
+    ]
   }
 ]
