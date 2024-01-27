@@ -3,6 +3,7 @@
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
 >
+<script src="{{'shopify-money.js' | asset_url}}" defer="defer"></script>
 <script src="{{'custom-product-variant.js' | asset_url}}" defer="defer"></script>
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -102,8 +103,10 @@
                   {% assign current_variant = product.selected_or_first_available_variant %}   
                  {% if current_variant.compare_at_price > current_variant.price %}
                    <span data-comparePrice><s>{{current_variant.compare_at_price |  money_with_currency }}</s></span>
+                   <span data-price>{{- product.price_min | money_with_currency -}}</span>
                    {% else  %}
-                    <span data-price>{{- product.price_min | money_with_currency -}}</span>
+                   <span data-comparePrice></span>
+                    <span data-price>{{- current_variant.price | money_with_currency -}}</span>
                  {% endif %}
                  </div>
               </div>

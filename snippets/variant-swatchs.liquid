@@ -14,6 +14,3 @@ data-url="{{ product.url }}"
     {% render 'product-variant-options', product: product, option: option, picker_type: picker_type %}
   </fieldset>
 </div>
-{% for media in product.media %}
-    {{media | json}}
-{% endfor %}
