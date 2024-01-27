@@ -548,7 +548,7 @@ a.product__text {
 }
 
 .product__media-item.product__media-item--variant {
-  display: none;
+  /* display: none; */
 }
 
 .product__media-item--variant:first-child {
@@ -1043,7 +1043,7 @@ a.product__text {
 }
 
 .thumbnail-list_item--variant:not(:first-child) {
-  display: none;
+  /* display: none; */
 }
 
 @media screen and (min-width: 990px) {
