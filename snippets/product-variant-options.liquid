@@ -45,11 +45,11 @@
     endfor
   -%}
 
-  {%- if block.settings.picker_type == 'button' -%}
+  {%- if picker_type == 'button' -%}
     <input
       type="radio"
       id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-      name="{{ option.name }}"
+      name="option[{{ option.name }}]"
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
       {% if option.selected_value == value %}
@@ -59,11 +59,17 @@
         class="disabled"
       {% endif %}
     >
-    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" data-value="{{- value -}}">
+      {% assign attachedVariant = product.variants %}
+      {% assign variantImageUrl = attachedVariant[forloop.index0].image | img_url %}
+      {% if variantImageUrl != blank and variantImageUrl != nil %}
+      <img src="{{variantImageUrl}}" width="25" loading="eager" height="25" style="max-width:25px">
+      {% else %}
       {{ value -}}
+      {% endif  %}
       <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
     </label>
-  {%- elsif block.settings.picker_type == 'dropdown' -%}
+  {%- elsif picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
       {% if option.selected_value == value %}

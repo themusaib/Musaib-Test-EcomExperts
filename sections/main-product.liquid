@@ -3,6 +3,7 @@
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
 >
+<script src="{{'custom-product-variant.js' | asset_url}}" defer="defer"></script>
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -97,12 +98,14 @@
               </div>
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                {%- render 'price',
-                  product: product,
-                  use_variant: true,
-                  show_badges: true,
-                  price_class: 'price--large'
-                -%}
+                 <div class="price__container">
+                  {% assign current_variant = product.selected_or_first_available_variant %}   
+                 {% if current_variant.compare_at_price > current_variant.price %}
+                   <span data-comparePrice><s>{{current_variant.compare_at_price |  money_with_currency }}</s></span>
+                   {% else  %}
+                    <span data-price>{{- product.price_min | money_with_currency -}}</span>
+                 {% endif %}
+                 </div>
               </div>
               {%- if product.quantity_price_breaks_configured? -%}
                 <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -408,7 +411,8 @@
               %}
 
             {%- when 'variant_picker' -%}
-              {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              {% comment %} {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %} {% endcomment %}
+              {% render 'custom-product-variant', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
             {%- when 'rating' -%}
